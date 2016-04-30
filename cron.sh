@@ -2,16 +2,18 @@
 
 cd ~/Developer/GitHub/Cron-Auto-Push
 
-touch "log/$(date).txt"
+filepath="log/$(date).log"
+date_var="$(date)"
+touch filepath
  
  
- git add * >> "log/$(date).txt"
+ git add * >> $filepath
  #if [[ $? != 0 ]] then 
  #   mail -s "add failed" someone@some.com
  #   exit 1
  #fi
  
- git commit -a -m "Auto-commit at $(date)" >> "log $(date).txt"
+ git commit -a -m "Auto-commit at $date_var" >> $filepath"
  #if [[ $? != 0 ]] then 
  #   mail -s "commit failed" someone@some.com
  #   exit 1
