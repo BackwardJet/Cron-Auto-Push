@@ -18,7 +18,7 @@ date_var="$(date)"
  #   exit 1
  #fi
  
- #git push
+ git push
  #if [[ $? != 0 ]] then 
  #   mail -s "push failed" someone@some.com
  #   exit 1
