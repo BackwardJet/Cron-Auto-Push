@@ -4,7 +4,6 @@ cd ~/Developer/GitHub/Cron-Auto-Push
 
 filepath="log/$(date).log"
 date_var="$(date)"
-touch filepath
  
  
  git add * >> "$filepath"
