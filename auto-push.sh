@@ -2,19 +2,31 @@
 
 cd ~/Developer/GitHub/Cron-Auto-Push
 
-filepath="log/$(date).log"
 date_var="$(date)"
-#date_var="${date_var// /-}"
-#echo $date_var
-#for i in $( ls log) 
+date_var="${date_var// /-}" #replaces all spaces with dashes
+filepath="log/$date_var.log"
+day="${filepath:0:14}" #gets the first 10 characters of string
+echo $day
+echo $filepath
+
+containsLogFromToday=0
+
+for filename in log/*.log; do
+	fileday=${filename:0:14}
+	if [ $fileday == $day ]; then
+		echo "Already auto-committed today"
+		containsLogFromToday=1
+		break
+    fi
+done
  
- git add * >> "$filepath"
+ #git add * >> "$filepath"
  #if [[ $? != 0 ]] then 
  #   mail -s "add failed" someone@some.com
  #   exit 1
  #fi
  
- git commit -a -m "Auto-commit at $date_var" >> "$filepath"
+ #git commit -a -m "Auto-commit at $date_var" >> "$filepath"
  #if [[ $? != 0 ]] then 
  #   mail -s "commit failed" someone@some.com
  #   exit 1
