@@ -20,6 +20,13 @@ for filename in log/*.log; do
     fi
 done
  
+
+if [ $containsLogFromToday == 0 ]; then
+	git add * >> "$filepath"
+	git commit -a -m "Auto-commit at $date_var"
+	#git push
+	#git push -u origin master
+fi
  #git add * >> "$filepath"
  #if [[ $? != 0 ]] then 
  #   mail -s "add failed" someone@some.com
