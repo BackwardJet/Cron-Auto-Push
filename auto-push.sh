@@ -4,7 +4,9 @@ cd ~/Developer/GitHub/Cron-Auto-Push
 
 filepath="log/$(date).log"
 date_var="$(date)"
- 
+#date_var="${date_var// /-}"
+#echo $date_var
+#for i in $( ls log) 
  
  git add * >> "$filepath"
  #if [[ $? != 0 ]] then 
@@ -18,7 +20,7 @@ date_var="$(date)"
  #   exit 1
  #fi
  
- git push
+ #git push
  #if [[ $? != 0 ]] then 
  #   mail -s "push failed" someone@some.com
  #   exit 1
