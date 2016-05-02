@@ -24,6 +24,7 @@ add_commit_push()
 
 if [[ $1 == "-o" ]]; then
 	add_commit_push
+	exit 1
 fi
 
 for filename in log/*.log; do
