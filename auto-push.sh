@@ -21,27 +21,26 @@ add_commit_push()
 }
 
 
-
-if [[ $1 == "-o" ]]; then
-	add_commit_push
-	exit 1
-fi
-
 check_for_auto_commit()
 {
 	for filename in log/*.log; do
 		fileday=${filename:0:14}
 		if [[ $fileday == $day ]] && [[ $1 != "-o" ]]; then # $1 is the first command-line argument, like sys.argv[1] in python
 			echo "Already auto-committed today"
-			containsLogFromToday=1
+			#containsLogFromToday=1
 			break
     	fi
 	done
 }
- 
 
-if [ $containsLogFromToday == 0 ]; then
+if [[ $1 == "-o" ]]; then
 	add_commit_push
+	exit 1
+else 
+	check_for_auto_commit
+	if [ $containsLogFromToday == 0 ]; then
+		add_commit_push
+	fi
 fi
 
 
