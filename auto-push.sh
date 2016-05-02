@@ -11,7 +11,7 @@ containsLogFromToday=0
 
 for filename in log/*.log; do
 	fileday=${filename:0:14}
-	if [ $fileday == $day ]; then
+	if [ $fileday == $day && $1 != "-o" ]; then
 		echo "Already auto-committed today"
 		containsLogFromToday=1
 		break
@@ -23,5 +23,5 @@ if [ $containsLogFromToday == 0 ]; then
 	git add * >> "$filepath"
 	git commit -a -m "Auto-commit at $date_var" >> "$filepath"
 	#git push
-	#git push -u origin master
+	git push -u origin master
 fi
