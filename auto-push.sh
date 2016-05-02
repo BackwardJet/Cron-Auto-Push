@@ -27,14 +27,17 @@ if [[ $1 == "-o" ]]; then
 	exit 1
 fi
 
-for filename in log/*.log; do
-	fileday=${filename:0:14}
-	if [[ $fileday == $day ]] && [[ $1 != "-o" ]]; then # $1 is the first command-line argument, like sys.argv[1] in python
-		echo "Already auto-committed today"
-		containsLogFromToday=1
-		break
-    fi
-done
+check_for_auto_commit()
+{
+	for filename in log/*.log; do
+		fileday=${filename:0:14}
+		if [[ $fileday == $day ]] && [[ $1 != "-o" ]]; then # $1 is the first command-line argument, like sys.argv[1] in python
+			echo "Already auto-committed today"
+			containsLogFromToday=1
+			break
+    	fi
+	done
+}
  
 
 if [ $containsLogFromToday == 0 ]; then
