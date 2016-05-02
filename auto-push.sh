@@ -21,7 +21,7 @@ done
 
 if [ $containsLogFromToday == 0 ]; then
 	git add * >> "$filepath"
-	git commit -a -m "Auto-commit at $date_var" >> "$filepath""
+	git commit -a -m "Auto-commit at $date_var" >> "$filepath"
 	#git push
 	#git push -u origin master
 fi
