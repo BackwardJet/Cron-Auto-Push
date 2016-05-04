@@ -17,6 +17,10 @@ add_commit_push()
     git commit -a -m "Auto-commit at $date_var" >> "$filepath"
 	echo "-------PUSH COMMENTS-------" >> "$filepath"
     git push -u origin master >> "$filepath"
+	#if [[ $? != 0 ]]; then
+	#	echo "Body" | mail -s "push failed" email@domain.com
+	#	exit 1
+	#fi
 	echo "success!"
 }
 
@@ -37,7 +41,7 @@ if [[ $1 == "-o" ]]; then
 	add_commit_push
 	exit 1
 else 
-	check_for_auto_commit
+	#check_for_auto_commit
 	if [ $containsLogFromToday == 0 ]; then
 		add_commit_push
 	fi
