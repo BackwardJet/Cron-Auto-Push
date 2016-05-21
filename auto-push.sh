@@ -16,11 +16,12 @@ add_commit_push()
 	echo "-------COMMIT COMMENTS-------" >> "$filepath"
     git commit -a -m "Auto-commit at $date_var" >> "$filepath"
 	echo "-------PUSH COMMENTS-------" >> "$filepath"
-    git push >> "$filepath"
-	#if [[ $? != 0 ]]; then
-	#	echo "Body" | mail -s "push failed" email@domain.com
-	#	exit 1
-	#fi
+    git push -u origin-ssh master >> "$filepath"
+	if [[ $? != 0 ]]; then
+		echo "Body" | mail -s "push failed" email@domain.com
+		echo "push failed"
+		exit 1
+	fi
 	echo "success!"
 }
 
