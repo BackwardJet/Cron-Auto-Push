@@ -1,51 +1,50 @@
- #!/bin/sh
+#!/bin/bash
 
 cd ~/Developer/GitHub/Cron-Auto-Push
 
 date_var="$(date)"
-date_var="${date_var// /-}" #replaces all spaces with dashes
-filepath="log/$date_var.log"
-day="${filepath:0:14}" #gets the first 10 characters of string
+date_var="${date_var// /-}" # replaces all spaces with dashes
+log_file="log/$date_var.log"
+day="${log_file:0:14}" # gets the first 10 characters of string
 
 containsLogFromToday=0
 
 add_commit_push()
 {
-	echo "-------ADD COMMENTS-------" >> $filepath
-	git add * >> "$filepath"
-	echo "-------COMMIT COMMENTS-------" >> "$filepath"
-    git commit -a -m "Auto-commit at $date_var" >> "$filepath"
-	echo "-------PUSH COMMENTS-------" >> "$filepath"
-    git push -u origin-ssh master >> "$filepath"
-	if [[ $? != 0 ]]; then
-		echo "Body" | mail -s "push failed" email@domain.com
-		echo "push failed"
-		exit 1
-	fi
-	echo "success!"
+    echo "-------ADD COMMENTS-------" >> $log_file
+    git add * >> "$log_file"
+    echo "-------COMMIT COMMENTS-------" >> "$log_file"
+    git commit -a -m "Auto-commit at $date_var" >> "$log_file"
+    echo "-------PUSH COMMENTS-------" >> "$log_file"
+    git push -u https://username:password@github.com/username/repository_name.git master >> "$log_file"
+    if [[ $? != 0 ]]; then
+        echo "Body" | mail -s "push failed" email@domain.com
+        echo "push failed"
+        exit 1
+    fi
+    echo "success!"
 }
 
 
 check_for_auto_commit()
 {
-	for filename in log/*.log; do
-		fileday=${filename:0:14}
-		if [[ $fileday == $day ]] && [[ $1 != "-o" ]]; then # $1 is the first command-line argument, like sys.argv[1] in python
-			#echo "Already auto-committed today"
-			containsLogFromToday=1
-			break
-    	fi
-	done
+    for filename in log/*.log; do
+        fileday=${filename:0:14}
+        if [[ $fileday == $day ]] && [[ $1 != "-o" ]]; then # $1 is the first command-line argument, like sys.argv[1] in python
+            containsLogFromToday=1
+            break
+        fi
+    done
 }
 
 if [[ $1 == "-o" ]]; then
-	add_commit_push
-	exit 1
+    add_commit_push
+    exit 1
 else 
-	check_for_auto_commit
-	if [ $containsLogFromToday == 0 ]; then
-		add_commit_push
-	fi
+    check_for_auto_commit
+    if [ $containsLogFromToday == 0 ]; then
+        add_commit_push
+    fi
 fi
 
 
