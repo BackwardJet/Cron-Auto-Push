@@ -1,5 +1,7 @@
 #!/bin/bash
 
+MY_PATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
 get_user_info() {
     echo -e "What is the path to your local git repository? Provide the full path. \n> \c"
     read LOCAL_REPO
@@ -23,5 +25,12 @@ get_user_info() {
     sed -i '6s/.*/'$replace_string'/' auto-push.sh
 }
 
+setup_cron() {
+    cron_string="* * * * * "$MY_PATH"/auto-push.sh"
+    (crontab -l 2>/dev/null; echo "$cron_string") | crontab -
+}
+
+
 get_user_info
 chmod a+x auto-push.sh
+setup_cron

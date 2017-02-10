@@ -9,7 +9,8 @@ A script to automate pushing to Github
     2. Fill out the information that the script will prompt you for.
         - Here is a screenshot of the information that I would fill out for this repository:
         - ![Screenshot Cron-Auto-Push User Info Example](http://tej-vuligonda.tk/public/img/Screenshot-CronAutoPush-User-Info-Example.png)
-    3. In the future, the setup script will input a crontab for you. The workaround for now is to follow steps 3 and 4 in the ***Manual*** section
+    3. The cronjob will now automatically be created for you.  
+    ~~In the future, the setup script will input a crontab for you. The workaround for now is to follow steps 3 and 4 in the ***Manual*** section~~
 * <h3>Manual: </h3>
   * Follow these steps to install the script:
     1. Edit lines 3 to 6 in auto-push.sh to the update the relevant variables
@@ -19,9 +20,9 @@ A script to automate pushing to Github
         - `crontab -e` 
     4. Input the following line of code to set-up a cron job that runs every minute:
         - `* * * * * ~/path/to/file/auto-push.sh`
-        - NOTE: Because the script limits the user to auto-committing once a day and cron jobs do not run when the user's computer is off or asleep, setting up a cron job that runs every minute will only auto-commit once per day but will still check every minute.
+        - NOTE: Because the script limits the user to auto-committing once a day and cron jobs do not run when the user's computer is off or asleep, setting up a cron job that runs every minute will only auto-commit once per day but will still check every minute. 
 
-    
+        
 ## Usage:
 * To manually run the script, input the following line of code in your bash shell:
     - `bash auto-push.sh -o` OR  
