@@ -4,6 +4,7 @@ LOCAL_REPO="/home/localuser"
 USERNAME="username"
 PASSWORD="password"
 REMOTE_REPO="github.com/github_user/repo-name.git"
+EMAIL="email@domain.com"
 
 cd $LOCAL_REPO
 
@@ -24,7 +25,7 @@ add_commit_push()
     echo "-------PUSH COMMENTS-------" >> "$log_file"
     git push -u https://$USERNAME:$PASSWORD@$REMOTE_REPO master >> "$log_file"
     if [[ $? != 0 ]]; then
-        echo "Body" | mail -s "push failed" email@domain.com
+        echo "Body" | mail -s "push failed" $EMAIL
         echo "push failed"
         exit 1
     fi

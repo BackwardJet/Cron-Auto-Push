@@ -23,6 +23,10 @@ get_user_info() {
     REMOTE_REPO="${REMOTE_REPO//\//\\\/}" # replaces all / with \/
     replace_string="REMOTE_REPO="\"$REMOTE_REPO\"
     sed -i '6s/.*/'$replace_string'/' auto-push.sh
+    echo -e "What email would you like to have errors sent to? Leave blank if you do not wish to have emails sent. \n> \c"
+    read EMAIL 
+    replace_string="EMAIL="\"$EMAIL\"
+    sed -i '7s/.*/'$replace_string'/' auto-push.sh
 }
 
 setup_cron() {
